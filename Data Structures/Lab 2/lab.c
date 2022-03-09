@@ -288,7 +288,7 @@ int main() {
                 scanf("%d", &age);
                 getchar();
                 printf("Nama : ");
-                scanf("%s", &nama);
+                scanf("%s", nama);
                 getchar();
                 insertHead(age, nama);
             }
@@ -301,7 +301,7 @@ int main() {
                 scanf("%d", &age);
                 getchar();
                 printf("Nama : ");
-                scanf("%s", &nama);
+                scanf("%s", nama);
                 getchar();
                 insertTail(age, nama);
             }
@@ -314,7 +314,7 @@ int main() {
                 scanf("%d", &age);
                 getchar();
                 printf("Nama : ");
-                scanf("%s", &nama);
+                scanf("%s", nama);
                 getchar();
                 insertMid(age, nama);
             }
@@ -336,7 +336,7 @@ int main() {
                 printf("Menghapus Node sesuai Nama!\n");
                 printf("Silahkan masukkan valuenya!\n");
                 printf("Nama : ");
-                scanf("%s", &nama);
+                scanf("%s", nama);
                 getchar();
                 printf("%s", nama);
                 deleteMid(nama);
