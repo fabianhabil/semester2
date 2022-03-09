@@ -338,7 +338,6 @@ int main() {
                 printf("Nama : ");
                 scanf("%s", nama);
                 getchar();
-                printf("%s", nama);
                 deleteMid(nama);
             }
             // Jika user input 7, maka keluar dari program.
