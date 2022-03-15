@@ -278,9 +278,9 @@ int main() {
         /* Option valid jika angka dan angka ada di interval 1 dan 4, karena menu sampai 3 dan jika ingin keluar
            user input 7 */
 
-           /* Jika user input 1, maka user akan input age dan nama dan nantinya dimasukkan ke head menggunakan
-              prosedur insertHead */
         if (valid == 1 && (choice >= 1 && choice <= 7)) {
+            /* Jika user input 1, maka user akan input age dan nama dan nantinya dimasukkan ke head menggunakan
+               prosedur insertHead */
             if (choice == 1) {
                 printf("Insert Head\n");
                 printf("Silahkan masukkan valuenya!\n");
