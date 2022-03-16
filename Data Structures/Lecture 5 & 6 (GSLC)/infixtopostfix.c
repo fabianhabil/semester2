@@ -144,6 +144,8 @@ char* infixToPost(char* input) {
         indexG++;
         pop();
     }
+    // Menghindari error yang tidak diinginkan, jika membuat string sendiri tambahkan \0 (Null Terminator)
+    postfix[indexG] = '\0';
     return postfix;
 }
 
