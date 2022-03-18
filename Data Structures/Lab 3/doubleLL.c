@@ -50,6 +50,8 @@ void insertHead(int age, char* nama) {
     }
     // Jika Ada elemen lain.
     else {
+        // Sambungkan head yang sebelumnya previous dengan head yang baru
+        Head->previous = newNode;
         // Kita buat sambungkan newNode ini dengan Head sebelumnya. 
         newNode->next = Head;
         // Karena Head, previousnya jadikan NULL
