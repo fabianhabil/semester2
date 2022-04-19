@@ -58,7 +58,7 @@ int main() {
     char sentence[101];
     puts("Soal No 2 - Data Structures UTS - Fabian Habil");
     // Input sentence from user.
-    printf("Masukkan Sentence (maksimal 100 karakter dan hanya huruf kecil!): ");
+    printf("Masukkan Sentence (maksimal 100 karakter): ");
     scanf(" %[^\n]", sentence);
     // Call procedure to find "random word".
     reverseWord(sentence);
