@@ -4,13 +4,13 @@
 
 // 2501976503 - Fabian Habil Ramdhan LAB Circular Single Linked List.
 
-// Deklarasi Struct node.
+// Struct for node declaration.
 struct node {
     int value;
     struct node* next;
 };
 
-// Deklarasi Head dan Tail NULL karena masih kosong.
+// Declaration Head and Tail, its NULL because still empty.
 struct node* Head = NULL;
 struct node* Tail = NULL;
 
@@ -22,58 +22,60 @@ void enterToContinue() {
 
 // Function pembantu untuk membuat stack yang nantinya akan disambungkan dengan yang lain.
 struct node* createNewNode(int value) {
-    // Alokasi memory.
+    // Memory Allocation.
     struct node* newNode = (struct node*)malloc(sizeof(struct node));
-    // Set value dari node yang baru menjadi input dari user.
+    // Set the value of the node from user input.
     newNode->value = value;
-    // next dari node baru masih kosong, karena nanti akan menyambungkan sesuai dengan kondisi yang ada.
-    // Misalnya insert Head, insert Tail itu next nya beda - beda.
+    // Next of the node pointing NULL, because there's a lot of scenario,
+    // Like insert head and insert tail, the next of the node is different, so we'll decide later per functions.
     newNode->next = NULL;
     return newNode;
 }
 
 // Procedur untuk insertTail dari linked list.
 void insertTail(int num) {
-    // Membuat node baru dengan variabel nodeBaru dengan isi valuenya adalah input user.
+    // Make new node with nodeBaru variable name, and the value is from user input.
     struct node* nodeBaru = createNewNode(num);
-    // Jika node masih kosong, node tersebut menjadi head dan tail
+    // If linked list still empty, this node will be the Head and the Tail.
     if (Head == NULL) {
         Head = nodeBaru;
         Tail = nodeBaru;
-        // Lalu sambungkan next dari tail menjadi Head karena ini circular linked list (connected).
+        // We connnect the next from the tail is the Head, because this is Circular Linked List (connected).
         Tail->next = Head;
     }
     else {
-        // Jika sudah ada elemen yang lain.
-        // Jadikan next dari node baru menjadi Head
-        /* Mengapa menjadi head? karena node baru menjadi tail yang baru dan tail
-           selalu bersambungan dengan head */
+        // If there is another node in the linked list.
+        // Connect the next from the newnode is the Head
+        /* Why head? because the new node is gonna be the new Tail, and Tail always
+           connected with the Head. */
         nodeBaru->next = Head;
-        /* Lalu jadikan next dari tail yang lama menjadi nodeBaru yang ingin dimasukkan
-           ke tail. */
+        // And we connect the next from the old Tail with the newNode
         Tail->next = nodeBaru;
-        // Jadikan nodeBaru menjadi tail yang baru.
+        // Make nodeBaru the new Tail.
         Tail = nodeBaru;
     }
 }
 
 // Prosedur untuk insertHead, untuk implementasi saya masih merubah node Head nya.
 void insertHead(int num) {
-    // Membuat node baru dengan variabel nodeBaru dengan isi valuenya adalah input user.
+    // Make new node with nodeBaru variable name, and the value is from user input.
     struct node* nodeBaru = createNewNode(num);
-    // Jika node masih kosong, node tersebut menjadi head dan tail
+    // If linked list still empty, this node will be the Head and the Tail.
     if (Head == NULL) {
         Head = nodeBaru;
         Tail = nodeBaru;
-        // Lalu sambungkan next dari tail menjadi Head karena ini circular linked list (connected).
+        // We connnect the next from the tail is the Head, because this is Circular Linked List (connected).
         Tail->next = Head;
     }
     else {
-        // Karena insert head dan circular linkedlist, Tail yang sekarang sambungkan ke node baru.
+        // If there is another node in the linked list.
+        // We connect the next from the old Tail with the newNode
         Tail->next = nodeBaru;
-        // Lalu sambungkan node baru dengan head sebelumnya
+        // Connect the next from the newnode is the Head
+        /* Why head? because the new node is gonna be the new Tail, and Tail always
+           connected with the Head. */
         nodeBaru->next = Head;
-        // Jadikan node baru menjadi Head yang baru.
+        // make nodeBaru the new Head.
         Head = nodeBaru;
     }
 }
@@ -168,52 +170,56 @@ void printAll(struct node* n) {
 
 
 void deleteHead() {
-    // Ketika node masih kosong.
+    // If linked list still empty
     if (Head == NULL) {
         printf("Node masih kosong!\n");
         enterToContinue();
     }
     else {
+        // Declaration for the node that we will delete.
         struct node* delete = Head;
-        // Ketika hanya ada satu node
+        // If there is only one node in linked list.
         if (Head == Tail) {
             Head = Tail = NULL;
         }
         else {
-            // Jadikan next dari Tail yang sekarang menjadi next dari Head sebelumnya.
+            // Make the next from the tail is the next from the old Head.
             Tail->next = Head->next;
-            // Jadikan next dari Head yang sebelumnya.
+            // Make the Head is next from the old Head.
             Head = Head->next;
+            // Free the memory of the node that we delete.
+            free(delete);
         }
     }
 }
 
 void deleteTail() {
-    // Ketika node masih kosong
+    // If linked list still empty
     if (Head == NULL) {
         printf("Node masih kosong!\n");
         enterToContinue();
     }
     else {
-        // Ketika hanya ada satu node;
+        // If there is only one node in linked list.
         if (Head == Tail) {
             Head = Tail = NULL;
         }
         else {
+            // Declaration for the node that we will traverse.
             struct node* current = Head;
-            /* Karena kita ingin mendapatkan node sebelum Tail dan tidak ada previous,
-               maka kita akan traverse sampai sebelum Tail. */
+            /* Because we need to get the node before the Tail and there's no previous,
+               so we need to traverse to before the tail.   */
             while (current->next->next != Head) {
                 // Traverse node.
                 current = current->next;
             }
-            // Membuat struct delete untuk nantinya akan didelete.
+            // Declaration for the node that we will delete.
             struct node* delete = Tail;
-            // Jadikan sebelum Tail menjadi Tail yang baru.
+            // Make the previous of the Tail become the new Tail.
             Tail = current;
-            // Jadikan next dari Tail yang baru menunjuk ke Head.
+            // Connect the next of the new Tail pointing to the Head.
             Tail->next = Head;
-            // Free memory dari node yang akan kita delete.
+            // Free the memory of the node that we delete.
             free(delete);
         }
     }

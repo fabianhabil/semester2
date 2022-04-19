@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studi Kasus - HCI - Fabian Habil - 2501976503</title>
+    <style>
+        /* Menghilangkan behavior html terhadap CSS untuk menghindari styling yang tidak diinginkan. */
+        body,
+        html {
+            font-family: "Helvetica";
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        h1,
+        h3,
+        h4,
+        p {
+            padding: 0;
+            margin: 0;
+        }
+
+        /* ------------------------------------------------------------------ */
+
+        .container-main {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0px 16px;
+        }
+
+        .container-box {
+            display: flex;
+            border: solid 0.5px blue;
+            justify-content: space-between;
+            flex-direction: column;
+        }
+
+        .header {
+            padding: 8px 16px;
+        }
+
+        .header h1 {
+            margin-bottom: 4px;
+        }
+
+        .header h4 {
+            font-weight: normal;
+            color: #606770;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .registration {
+            display: flex;
+            flex-direction: column;
+            padding: 16px;
+            border-top: solid 1px #acacac;
+        }
+
+        .nama {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .nama div {
+            flex: 1;
+            max-width: 200px;
+        }
+
+        .first-name {
+            margin-right: 8px;
+        }
+
+        input[type=text],
+        input[type="password"] {
+            padding: 12px;
+            width: 100%;
+            margin-bottom: 12px;
+            background-color: rgb(123, 130, 138, 0.1);
+            border: solid 0.1px rgb(123, 130, 138, 0.5);
+            border-radius: 4px;
+            font-size: 15px;
+        }
+
+        input[type="radio"] {
+            margin: 0;
+            padding: 0;
+        }
+
+        input[type=text]:focus,
+        input[type="password"]:focus,
+        select:focus {
+            outline: solid 0.1px rgb(123, 130, 138, 0.4);
+        }
+
+        .tanggal-lahir {
+            margin-bottom: 12px;
+        }
+
+        form a {
+            color: white;
+            background-color: rgb(78, 83, 88, 0.8);
+            padding: 1px 4px;
+            border-radius: 50%;
+            font-size: 10px;
+            text-decoration: none;
+            vertical-align: middle;
+        }
+
+        form a:hover {
+            cursor: pointer;
+        }
+
+        .tanggal-lahir p {
+            font-size: 12px;
+            color: #606770;
+            margin-bottom: 2px;
+        }
+
+        .tanggal-lahir-form {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        select {
+            padding: 8px;
+            width: 100%;
+            border-radius: 4px;
+            border: solid 0.1px rgb(123, 130, 138, 0.5);
+            font-size: 15px;
+        }
+
+        .tanggal-lahir-form div {
+            flex: 1;
+        }
+
+        .bulan {
+            margin: 0px 12px;
+        }
+
+        .jenis-kelamin {
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .jenis-kelamin-form {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .jenis-kelamin p {
+            font-size: 12px;
+            color: #606770;
+            margin-bottom: 2px;
+        }
+
+        .jenis-kelamin-form div {
+            display: flex;
+            border: solid 1px;
+            padding: 8px;
+            border-radius: 4px;
+            flex: 1;
+            border: solid 0.1px rgb(123, 130, 138, 0.5);
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .jenis-kelamin-form .perempuan {
+            flex: 1.3;
+        }
+
+        .laki-laki {
+            margin: 0px 12px;
+        }
+
+        .about {
+            margin-bottom: 16px;
+        }
+
+        .about p {
+            max-width: 400px;
+            font-size: 11px;
+            color: #777777;
+        }
+
+        .about a {
+            text-decoration: none;
+            color: #385898
+        }
+
+        .submit {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .submit button {
+            background: none;
+            background-color: rgb(0, 164, 0, 1);
+            border: none;
+            border-radius: 8px;
+            box-shadow: none;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            height: 36px;
+            padding: 0 32px;
+            text-shadow: none;
+            min-width: 200px;
+        }
+
+        button:hover {
+            cursor: pointer;
+            background-color: rgb(0, 164, 0, 0.8);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- div besar yang meng-wrap dan membuat box utama di tengah. -->
+    <div class="container-main">
+        <!-- div untuk wrap satu isi box form register. -->
+        <div class="container-box">
+            <!-- div untuk wrap header. -->
+            <div class="header">
+                <h1>Daftar</h1>
+                <h4>Ini cepat dan mudah.</h4>
+            </div>
+            <!-- div untuk wrap registration yang berada di bawah header. -->
+            <div class="registration">
+                <!-- wrap menggunakan form -->
+                <form>
+                    <!-- div untuk wrap pengisian nama depan dan nama belakang. -->
+                    <div class="nama">
+                        <div class="first-name">
+                            <input type="text" name="nama-depan" placeholder="Nama Depan" />
+                        </div>
+                        <div class="last-name">
+                            <input type="text" name="nama-belakang" placeholder="Nama Belakang" />
+                        </div>
+                    </div>
+                    <!-- div untuk nomor telfon atau email -->
+                    <div class="nomor-telfon">
+                        <input type="text" name="nomor-telfon" placeholder="Nomor seluler atau email" />
+                    </div>
+                    <!-- div untuk password -->
+                    <div class="password">
+                        <input type="password" name="password" placeholder="Kata sandi baru" />
+                    </div>
+                    <!-- div untuk tanggal lahir -->
+                    <div class="tanggal-lahir">
+                        <p>Tanggal Lahir <a
+                                href="https://www.youtube.com/watch?v=YoZLUNZ1a3Y&ab_channel=FabianHabilRamdhan"
+                                target="_blank">?</a></p>
+                        <!-- div untuk wrap 3 section, tanggal, bulan dan tahun. -->
+                        <div class="tanggal-lahir-form">
+                            <!-- div untuk button form select tanggal -->
+                            <div class="tanggal">
+                                <!-- select tanggal dari 1 sampai 10 -->
+                                <select name="tanggal" id="tanggal">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                            <!-- div untuk button form select bulan -->
+                            <div class="bulan">
+                                <!-- select bulan dari januari sampai desember -->
+                                <select name="bulan" id="bulan">
+                                    <option value="Jan">Jan</option>
+                                    <option value="Feb">Feb</option>
+                                    <option value="Mar">Mar</option>
+                                    <option value="Apr">Apr</option>
+                                    <option value="Mei">Mei</option>
+                                    <option value="Jun">Jun</option>
+                                    <option value="Jul">Jul</option>
+                                    <option value="Aug">Aug</option>
+                                    <option value="Sep">Sep</option>
+                                    <option value="Okt">Okt</option>
+                                    <option value="Nov">Nov</option>
+                                    <option value="Des">Des</option>
+                                </select>
+                            </div>
+                            <!-- div untuk button form select tahun -->
+                            <div class="tahun">
+                                <!-- select tahun dari tahun sekarang sampai 10 tahun terakhir -->
+                                <select name="tahun" id="tahun">
+                                    <option value="2022">2022</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2016">2016</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2014">2014</option>
+                                    <option value="2013">2013</option>
+                                    <option value="2012">2012</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- div untuk jenis kelamin -->
+                    <div class="jenis-kelamin">
+                        <p>Jenis Kelamin <a
+                                href="https://www.youtube.com/watch?v=YoZLUNZ1a3Y&ab_channel=FabianHabilRamdhan"
+                                target="_blank">?</a></p>
+                        <!-- div untuk wrap 3 pilihan jenis kelamin. -->
+                        <div class="jenis-kelamin-form">
+                            <!-- div untuk perempuan -->
+                            <div class="perempuan">
+                                <label for="perempuan">Perempuan</label>
+                                <input type="radio" id="perempuan" name="gender" value="perempuan" />
+                            </div>
+                            <!-- div untuk laki - laki -->
+                            <div class="laki-laki">
+                                <label for="laki-laki">Laki-laki</label>
+                                <input type="radio" id="laki-laki" name="gender" value="laki-laki" />
+                            </div>
+                            <!-- div untuk kelamin khusus -->
+                            <div class="unknown-gender">
+                                <label for="unknown-gender">Khusus</label>
+                                <input type="radio" id="unknown-gender" name="gender" value="unknown-gender" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- div untuk tulisan about di bawah form jenis kelamin. -->
+                <div class="about">
+                    <p>Dengan mengklik Daftar, Anda menyetujui
+                        <a href="https://www.youtube.com/watch?v=YoZLUNZ1a3Y&ab_channel=FabianHabilRamdhan"
+                            target="_blank">Ketentuan</a>,
+                        <a href="https://www.youtube.com/watch?v=YoZLUNZ1a3Y&ab_channel=FabianHabilRamdhan"
+                            target="_blank"> Kebijakan Data</a>
+                        dan <a href="https://www.youtube.com/watch?v=YoZLUNZ1a3Y&ab_channel=FabianHabilRamdhan"
+                            target="_blank">Kebijakan Cookie</a>
+                        kami. Anda akan menerima Notifikasi SMS dari Facebook dan dapat menolaknya kapan saja.
+                    </p>
+                </div>
+                <!-- div untuk button submit daftar -->
+                <div class="submit">
+                    <a href="https://www.youtube.com/watch?v=YoZLUNZ1a3Y&ab_channel=FabianHabilRamdhan" target="_blank">
+                        <button>Daftar</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Console log untuk memberi tahu pemilik file uts ini.
+        console.log("2501976503 - Fabian Habil - Studi Kasus HCI - LC75")
+    </script>
+</body>
+
+</html>
