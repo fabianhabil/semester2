@@ -8,6 +8,7 @@
 // ------------------------ DEFINE ------------------------ //
 #define cls system("cls");
 
+
 // ------------------------ STRUCT DECLARATION ------------------------ //
 // Struct for saving patient personal data.
 struct dataPasien {
