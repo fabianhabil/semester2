@@ -1,5 +1,7 @@
 *nyatet.txt
 *.docx
+*.zip
+*tempCodeRunnerFile.c
 
 ##### Windows
 # Windows thumbnail cache files

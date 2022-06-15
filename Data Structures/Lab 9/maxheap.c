@@ -38,9 +38,12 @@ int isLeaf(int current, int size) {
     }
 }
 
+// Procedur untuk print heap tersebut.
 void view(int* heap, int size) {
+    // Jika hanya ada satu node di heap tersebut
     if (size == 1) {
-        printf("Single element in heap!\n");
+        printf("Single node in heap!\n");
+        printf("Value: %d\n", heap[size]);
         return;
     }
 
@@ -113,17 +116,17 @@ int main() {
     int heap[100];
     int size = 0;
     size = insert(heap, size, 20);
-    size = insert(heap, size, 15);
-    size = insert(heap, size, 13);
-    size = insert(heap, size, 16);
-    size = insert(heap, size, 19);
-    size = insert(heap, size, 12);
+    // size = insert(heap, size, 15);
+    // size = insert(heap, size, 13);
+    // size = insert(heap, size, 16);
+    // size = insert(heap, size, 19);
+    // size = insert(heap, size, 12);
     view(heap, size);
     printf("root: %d\n", getMax(heap));
-    int maxvalue = extractmax(heap, &size);
+    extractmax(heap, &size);
     printf("root: %d\n", getMax(heap));
     view(heap, size);
-    deleteByIndex(heap, &size, 2);
-    printf("\n");
-    view(heap, size);
+    // deleteByIndex(heap, &size, 2);
+    // printf("\n");
+    // view(heap, size);
 }
