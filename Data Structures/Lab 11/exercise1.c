@@ -2,32 +2,27 @@
 #include <stdlib.h>
 #include <string.h>
 
-// 2501976503 - Fabian Habil Ramdhan - Quiz no 2 Data Structures 15 Juni 2022
-
-// Jawaban Quiz
-// Untuk searching, jika dibandingkan AVL Tree dengan BST mana lebih cepat itu kembali lagi
-// dengan data yang ada, namun jika kita mengambil Worst Case, melakukan searching di BST
-// adalah O(N) karena ada kemungkinan tree tersebut menjadi skewed dengan height sebanyak data.
-// Namun, searching di AVL Tree Worst Case Scenario nya adalah O(log n) karena tree yang kita
-// punya tidak mungkin berat ke kanan atau ke kiri karena tree tersebut kita maintain atau
-// pertahankan balance nya.
-
+// 2501976503 - Fabian Habil Ramdhan - GSLC Sesi 11 Lab - Exercise 1
 
 // Variabel global untuk delete, 0 tidak ditemukkan 1 jika ditemukan.
 int notFound = 0;
 
+// Variabel global untuk jumlah data yang di AVL Tree.
+int count = 0;
+
+// Deklarasi struct untuk Avl Tree
 struct node {
-    char fileName[100];
-    char fileType[100];
+    char name[100];
+    char class[100];
+    double score;
     int height;
-    double fileSize;
     struct node* left;
     struct node* right;
 };
 
 // Prosedur tambahan agar user menekan enter untuk melanjutkan.
 void enterToContinue() {
-    printf("Enter untuk melanjutkan!");
+    printf("Enter To Continue!");
     getchar();
 }
 
@@ -98,33 +93,33 @@ struct node* rotateLeft(struct node* current) {
     return targetRotate;
 }
 
-// Function for new node.
-struct node* createNewNode(double fileSize, char* fileName, char* fileType) {
-    struct node* newNode
-        = (struct node*)malloc(sizeof(struct node));
-    newNode->fileSize = fileSize;
-    strcpy(newNode->fileName, fileName);
-    strcpy(newNode->fileType, fileType);
+// Function untuk pembuatan node baru
+struct node* createNewNode(double score, char* name, char* class) {
+    struct node* newNode = (struct node*)malloc(sizeof(struct node));
+    newNode->score = score;
+    strcpy(newNode->class, class);
+    strcpy(newNode->name, name);
     newNode->left = NULL;
     newNode->right = NULL;
     return newNode;
 }
 
-// Insert
-struct node* insert(struct node* current, double fileSize, char* fileName, char* fileType) {
+// Insert new node ke AVL Tree.
+struct node* insert(struct node* current, double score, char* name, char* class) {
     // Jika yang ditunjuk kosong maka buat node baru.
     if (current == NULL) {
-        return createNewNode(fileSize, fileName, fileType);
+        count = count + 1;
+        return createNewNode(score, name, class);
     }
 
     // Jika yang akan diinsert lebih besar dari node yang divisit sekarang.
-    else if (fileSize > current->fileSize) {
-        current->right = insert(current->right, fileSize, fileName, fileType);
+    else if (score >= current->score) {
+        current->right = insert(current->right, score, name, class);
     }
 
     // Jika yang akan diinsert lebih kecil dari node yang divisit sekarang.
-    else if (fileSize < current->fileSize) {
-        current->left = insert(current->left, fileSize, fileName, fileType);
+    else if (score < current->score) {
+        current->left = insert(current->left, score, name, class);
     }
 
     // Jika tidak lebih besar dan tidak lebih kecil, maka sama dan tidak boleh di AVL Tree.
@@ -143,11 +138,11 @@ struct node* insert(struct node* current, double fileSize, char* fileName, char*
         // rotasi ke kanan (balancing ke kanan)
 
         // kasus 1 : rotasi ke kanan 1x (Left Left Case)
-        if (fileSize < current->left->fileSize) {
+        if (score < current->left->score) {
             return rotateRight(current);
         }
         // kasus 2 : rotasi ke kiri, baru ke kanan (2x rotasi) (Left Right Case)
-        else if (fileSize > current->left->fileSize) {
+        else if (score > current->left->score) {
             current->left = rotateLeft(current->left);
             return rotateRight(current);
         }
@@ -158,12 +153,12 @@ struct node* insert(struct node* current, double fileSize, char* fileName, char*
         // rotasi ke kiri (balancing ke kiri)
 
         // kasus 1 : rotasi ke kiri 1x (Right Right Case)
-        if (fileSize > current->right->fileSize) {
+        if (score > current->right->score) {
             return rotateLeft(current);
         }
 
         // kasus 2 : rotasi ke kanan, baru ke kiri (Right Left Case)
-        else if (fileSize < current->right->fileSize) {
+        else if (score < current->right->score) {
             current->right = rotateRight(current->right);
             return rotateLeft(current);
         }
@@ -171,30 +166,16 @@ struct node* insert(struct node* current, double fileSize, char* fileName, char*
     return current;
 }
 
-// Left - Print Node - Right
-void printInOrder(struct node* current) {
-    if (current == NULL) {
-        return;
-    }
-    else {
-        printInOrder(current->left);
-        printf("Nama File: %s\n", current->fileName);
-        printf("Tipe File: %s\n", current->fileType);
-        printf("Ukuran File: %.2lfKB(%.2lfMB)\n\n", current->fileSize, current->fileSize / 1000);
-        printInOrder(current->right);
-    }
-}
-
-// Search tree by name akan O(n) karena tree ini adalah BST dan value berdasarkan fileSize
-// bukan fileName.
+// Search tree by name akan O(n) karena tree ini adalah BST dan value berdasarkan score
+// bukan name.
 int searchByName(struct node* current, char* search) {
     // Jika tidak ditemukkan.
     if (current == NULL) {
         return -1;
     }
     // Jika node sekarang sama dengan yang akan dicari.
-    else if (!strcmp(current->fileName, search)) {
-        printf("%s ditemukkan dengan ukuran file %.2lfKB(%.2lfMB) dan tipe file nya adalah %s\n", current->fileName, current->fileSize, current->fileSize / 1000, current->fileType);
+    else if (!strcmp(current->name, search)) {
+        printf("%s found in class %s with score %.2lf!\n", current->name, current->class, current->score);
         return 1;
     }
     else {
@@ -204,55 +185,64 @@ int searchByName(struct node* current, char* search) {
     }
 }
 
-// Search tree berdasarkan size
-int searchBySize(struct node* current, double fileSize) {
-    // Jika tidak ditemukkan.
-    if (current == NULL) {
-        return -1;
+// Untuk print nilai yang lebih besar dari input, kita mempunyai time complexity O(N).
+// Karena ada kemungkinan nilai yang diinput membuat nilai yang sama dan berdekatan
+// ada di subtree yang berbeda, sebelah kiri atau sebelah kanan dari root tree kita.
+void searchBiggerThanScore(struct node* current, double score) {
+    // Jika count
+    if (count == 0) {
+        printf("Data still empty!");
+        return;
     }
-    // Jika node sekarang sama ukuran file nya dengan yang dicari.
-    else if (current->fileSize == fileSize) {
-        printf("%s ditemukkan dengan ukuran file %.2lfKB(%.2lfMB) dan tipe file nya adalah %s\n", current->fileName, current->fileSize, current->fileSize / 1000, current->fileType);
-        return 1;
+    if (current == NULL) {
+        return;
     }
     else {
-        // Jika yang dicari lebih besar dari node sekarang, maka kita cari ke children sebelah kanannya.
-        if (fileSize > current->fileSize) {
-            searchBySize(current->right, fileSize);
+        if (current->score >= score) {
+            printf("Student's Name: %s\n", current->name);
+            printf("Student's Class: %s\n", current->class);
+            printf("Student's Score: %.2lf\n\n", current->score);
         }
-        // Jika yang dicari lebih kecil dari node sekarang, maka kita cari ke children sebelah kirinya.
-        else if (fileSize < current->fileSize) {
-            searchBySize(current->left, fileSize);
-        }
+        searchBiggerThanScore(current->left, score);
+        searchBiggerThanScore(current->right, score);
     }
 }
 
 // Untuk mendapatkan node dengan value terbesar.
-struct node* maxValueNode(struct node* curr) {
-    struct node* traverse = curr;
+struct node* maxValueNode(struct node* current) {
+    struct node* traverse = current;
     while (traverse->right != NULL) {
         traverse = traverse->right;
     }
     return traverse;
 }
 
+// Untuk mendapatkan node dengan value terkecil.
+struct node* minValueNode(struct node* current) {
+    struct node* traverse = current;
+    while (traverse->left != NULL) {
+        traverse = traverse->left;
+    }
+    return traverse;
+}
+
 // Untuk delete sama seperti BST, yang membedakan adalah kita melakukan balancing di tree tersebut.
-struct node* delete(struct node* current, double fileSize) {
+struct node* delete(struct node* current, char* search) {
     // Jika kosong maka tidak ditemukkan.
     if (current == NULL) {
         notFound = 1;
         return current;
     }
-    // Jika yang akan dihapus lebih kecil, maka cari di children sebelah kiri.
-    if (fileSize < current->fileSize) {
-        current->left = delete(current->left, fileSize);
-    }
-    // Jika yang akan dihapus lebih besar, maka cari di children sebelah kanan.
-    else if (fileSize > current->fileSize) {
-        current->right = delete(current->right, fileSize);
+    // Jika tidak ditemukkan, karena kita search by name dan tree berdasarkan score.
+    // maka delete time complexity nya O(N)
+    if (strcmp(current->name, search) != 0) {
+        current->left = delete(current->left, search);
+        current->right = delete(current->right, search);
     }
     // Jika ditemukkan
     else {
+        notFound = 0;
+        count = count - 1;
         // Case pertama jika tidak ada atau hanya mempunyai satu child.
         struct node* temp = NULL;
         if (current->left == NULL || current->right == NULL) {
@@ -281,15 +271,16 @@ struct node* delete(struct node* current, double fileSize) {
         // menggunakan maksimal dari children sebelah kiri.
         else {
             temp = maxValueNode(current->left);
-            // Copy all the data from the max node to the current node.
-            strcpy(current->fileName, temp->fileName);
-            strcpy(current->fileType, temp->fileType);
-            current->fileSize = temp->fileSize;
-            current->left = delete(current->left, temp->fileSize);
+            // Copy semua data dari max node ke node sekarang yang akan dihapus.
+            strcpy(current->name, temp->name);
+            strcpy(current->class, temp->class);
+            current->score = temp->score;
+            // Delete node yang tadi ditukar ke posisi node yang dihapus.
+            current->left = delete(current->left, temp->name);
         }
     }
 
-    // Kita cek lagi, apakah tree hanya menjadi satu node ketika sudah menghapus
+    // Kita cek lagi, apakah tree menjadi kosong ketika sudah menghapus
     // Jika iya, maka langsung return
     if (current == NULL) {
         return current;
@@ -301,17 +292,16 @@ struct node* delete(struct node* current, double fileSize) {
 
     // balance
     int balance = getBalance(current);
-
     // berat ke kiri
     if (balance > 1) {
         // rotasi ke kanan (balancing ke kanan)
 
         // kasus 1 : rotasi ke kanan 1x (Left Left Case)
-        if (current->fileSize < current->left->fileSize) {
+        if (current->score < current->left->score) {
             return rotateRight(current);
         }
         // kasus 2 : rotasi ke kiri, baru ke kanan (2x rotasi) (Left Right Case)
-        else if (current->fileSize > current->left->fileSize) {
+        else if (current->score > current->left->score) {
             current->left = rotateLeft(current->left);
             return rotateRight(current);
         }
@@ -322,18 +312,48 @@ struct node* delete(struct node* current, double fileSize) {
         // rotasi ke kiri (balancing ke kiri)
 
         // kasus 1 : rotasi ke kiri 1x (Right Right Case)
-        if (current->fileSize > current->right->fileSize) {
+        if (current->score > current->right->score) {
             return rotateLeft(current);
         }
 
         // kasus 2 : rotasi ke kanan, baru ke kiri (Right Left Case)
-        else if (current->fileSize < current->right->fileSize) {
+        else if (current->score < current->right->score) {
             current->right = rotateRight(current->right);
             return rotateLeft(current);
         }
     }
 
     return current;
+}
+
+// Prosedur student report.
+void studentReport(struct node* current) {
+    struct node* lowest = NULL;
+    struct node* highest = NULL;
+    if (count == 0) {
+        printf("Student Data still empty!\n");
+        return;
+    }
+    else if (count == 1) {
+        lowest = minValueNode(current);
+        printf("Only 1 Student in database!\n");
+        printf("Student's Name: %s\n", lowest->name);
+        printf("Student's Class: %s\n", lowest->class);
+        printf("Student's Score: %.2lf\n\n", lowest->score);
+    }
+    else {
+        lowest = minValueNode(current);
+        highest = maxValueNode(current);
+        printf("There is %d Student!\n", count);
+        printf("The Lowest score in database!\n");
+        printf("Student's Name: %s\n", lowest->name);
+        printf("Student's Class: %s\n", lowest->class);
+        printf("Student's Score: %.2lf\n\n", lowest->score);
+        printf("The Highest score in database!\n");
+        printf("Student's Name: %s\n", highest->name);
+        printf("Student's Class: %s\n", highest->class);
+        printf("Student's Score: %.2lf\n\n", highest->score);
+    }
 }
 
 int main() {
@@ -345,13 +365,13 @@ int main() {
     while (1) {
         system("cls");
         puts("2501976503 - Fabian Habil");
-        puts("Filing System");
+        puts("Student Score Management System");
         // Memperlihatkan kepada user ada menu apa saja di program.
-        puts("1. Input File Data");
-        puts("2. Print all file (level order)");
-        puts("3. Search by Name");
-        puts("4. Search by Size");
-        puts("5. Delete File");
+        puts("1. Input Data Student");
+        puts("2. Find a student based on their name");
+        puts("3. Find a student that has a bigger score than the input");
+        puts("4. Delete a certain student's data");
+        puts("5. Report");
         puts("6. Exit");
         printf("Input: ");
         /* Input ke variabel input, variabel valid di sini jika user input sesuai dengan format data specifier yang ada (integer),
@@ -360,70 +380,66 @@ int main() {
         valid = scanf("%d", &choice);
         // Getchar untuk clear buffer.
         getchar();
-        /* Option valid jika angka dan angka ada di interval 1 dan 2, karena menu sampai 2 dan jika ingin keluar
-           user input 3 */
+        /* Option valid jika angka dan angka ada di interval 1 dan 6, karena menu sampai 5 dan jika ingin keluar
+           user input 6 */
         if (valid == 1 && (choice >= 1 && choice <= 6)) {
             system("cls");
             if (choice == 1) {
-                char fileName[50];
-                char fileType[50];
-                double fileSize;
-                printf("Silahkan masukkan nama file: ");
-                scanf(" %[^\n]", fileName);
+                char name[50];
+                char class[50];
+                double score;
+                printf("Input student's name: ");
+                scanf(" %[^\n]", name);
                 getchar();
-                printf("IMG / EXE / PDF / SONG\n");
-                printf("Silahan masukkan tipe file: ");
-                scanf(" %[^\n]", fileType);
+                printf("LA75 / LB75 / LC75 / LD75\n");
+                printf("Input student's class: ");
+                scanf(" %[^\n]", class);
                 getchar();
-                printf("Silahkan masukkan ukuran file (dalam ukuran KB): ");
-                scanf("%lf", &fileSize);
+                printf("Input student's score: ");
+                scanf("%lf", &score);
                 getchar();
-                root = insert(root, fileSize, fileName, fileType);
+                root = insert(root, score, name, class);
                 enterToContinue();
             }
             else if (choice == 2) {
-                // Print list antrian
-                printInOrder(root);
-                enterToContinue();
-            }
-            else if (choice == 3) {
                 char search[50];
-                printf("Silahkan masukkan nama file yang akan dicari: ");
+                printf("Input student's name: ");
                 scanf(" %[^\n]", search);
                 getchar();
                 int found = searchByName(root, search);
-                enterToContinue();
                 if (found == -1) {
-                    printf("File name dengan %s tidak ditemukkan!\n", search);
+                    printf("Student with name %s not found!\n", search);
                 }
+                enterToContinue();
+            }
+            else if (choice == 3) {
+                double search;
+                printf("Input score you want to find: ");
+                scanf("%lf", &search);
+                getchar();
+                printf("Showing all student's that have score bigger equal to %.2lf\n", search);
+                searchBiggerThanScore(root, search);
                 enterToContinue();
             }
             else if (choice == 4) {
-                double search;
-                printf("Silahkan masukkan ukuran file yang akan dicari (dalam ukuran KB): ");
-                scanf("%lf", &search);
+                // Jadikan 0 lagi karena kita akan menghapus lagi.
+                notFound = 0;
+                char search[50];
+                printf("Input student's name: ");
+                scanf(" %[^\n]", search);
                 getchar();
-                int found = searchBySize(root, search);
-                if (found == -1) {
-                    printf("File name dengan size %.2lfKB tidak ditemukkan\n", search);
+                root = delete(root, search);
+                if (notFound == 1) {
+                    printf("Student with name %s not found!", search);
                 }
+                else {
+                    printf("Student with name %s deleted!", search);
+                }
+                printf("\n");
                 enterToContinue();
             }
             else if (choice == 5) {
-                // Jadikan 0 lagi karena kita akan menghapus lagi.
-                notFound = 0;
-                double deleteKey;
-                printf("Silahkan masukkan ukuran file yang akan dihapus (dalam ukuran KB): ");
-                scanf("%lf", &deleteKey);
-                getchar();
-                root = delete(root, deleteKey);
-                if (notFound == 1) {
-                    printf("File dengan ukuran %.2lfKB tidak ditemukkan!", deleteKey);
-                }
-                else {
-                    printf("File dengan ukuran %.2lfKB berhasil dihapus!", deleteKey);
-                }
-                printf("\n");
+                studentReport(root);
                 enterToContinue();
             }
             else if (choice == 6) {

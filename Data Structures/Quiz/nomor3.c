@@ -3,7 +3,6 @@
 #include <string.h>
 
 // 2501976503 - Fabian Habil Ramdhan
-
 typedef struct {
     char nama[50];
     char pendidikan[50];
@@ -40,7 +39,6 @@ int leftChildren(int current) {
 int rightChildren(int current) {
     return current * 2 + 1;
 }
-
 
 // Cek apakah node tersebut leaf atau bukan.
 // Jika iya return 1, jika tidak return 0
@@ -99,12 +97,34 @@ int insert(data Data[], int size, double value, char* nama, char* pendidikan) {
 
 // Find
 int findIndex(data Data[], int size, double penghasilan) {
-    for (int i = 0; i < size; i++) {
+    for (int i = 1; i <= size; i++) {
         if (Data[i].penghasilan == penghasilan) {
             return i;
         }
     }
     return -1;
+}
+
+// Extract Min atau kita hapus element paling kecil di heap.
+int extractMin(data Data[], int* size) {
+    // Kita akan menghapus element sesuai paling atas dari heap
+    // dengan cara kita tukar dengan element paling terakhir, lalu kita heapify
+    // root tersebut.
+
+    // Buat variabel key yang didelete untuk menyimpan dan nantinya direturn.
+    int deleted = Data[1].penghasilan;
+
+    // Isi root sekarang menjadi element pertama dari heap.
+    // dan kurangi size nya dengan 1.
+    Data[1] = Data[*size];
+    *size = *size - 1;
+    // Jika menjadi 0 maka tinggal satu tersisa, tidak perlu min heapify.
+    if (*size == 0) {
+        return deleted;
+    }
+    // Panggil fungsi rekursif min heapify dari index tersebut.
+    minHeapify(Data, *size, 1);
+    return deleted;
 }
 
 // Procedur untuk delete element sesuai index input user.
@@ -115,12 +135,14 @@ int deleteByIndex(data Data[], int* size, int index) {
 
     // Buat variabel key yang didelete untuk menyimpan dan nantinya direturn.
     int deleted = Data[index].penghasilan;
-
     // Isi root sekarang menjadi element sesuai index dari heap.
     // dan kurangi size nya dengan 1.
     Data[index] = Data[*size];
     *size = *size - 1;
-
+    // Jika menjadi 0 maka tinggal satu tersisa, tidak perlu min heapify.
+    if (*size == 0) {
+        return deleted;
+    }
     // Panggil fungsi rekursif min heapify dari index tersebut.
     minHeapify(Data, *size, index);
     return deleted;
@@ -169,7 +191,8 @@ int main() {
         puts("1. Input Data");
         puts("2. View Data");
         puts("3. Delete by Penghasilan");
-        puts("4. Exit");
+        puts("4. Extract Min");
+        puts("5. Exit");
         printf("Input: ");
         /* Input ke variabel input, variabel valid di sini jika user input sesuai dengan format data specifier yang ada (integer),
            maka akan mereturn value 1. Sebaliknya jika user input tidak sesuai dengan format data specifier yang ada (integer),
@@ -179,7 +202,7 @@ int main() {
         getchar();
         /* Option valid jika angka dan angka ada di interval 1 dan 2, karena menu sampai 2 dan jika ingin keluar
            user input 3 */
-        if (valid == 1 && (choice >= 1 && choice <= 4)) {
+        if (valid == 1 && (choice >= 1 && choice <= 5)) {
             if (choice == 1) {
                 char nama[50];
                 char pendidikan[50];
@@ -216,6 +239,11 @@ int main() {
                 enterToContinue();
             }
             else if (choice == 4) {
+                int value = extractMin(Data, &size);
+                printf("%d\n", value);
+                enterToContinue();
+            }
+            else if (choice == 5) {
                 system("cls");
                 printf("2501976503 - Fabian Habil Ramdhan");
                 break;
