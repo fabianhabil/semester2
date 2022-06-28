@@ -279,6 +279,10 @@ int main() {
             else if (choice == 5) {
                 report(Front);
             }
+            else if (choice == 6) {
+                printf("2501976503 - Fabian Habil Ramdhan");
+                break;
+            }
             enterToContinue();
         }
         else {

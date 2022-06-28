@@ -104,6 +104,10 @@ int main() {
                 printStack();
                 enterToContinue();
             }
+            else if (choice == 3) {
+                printf("2501976503 - Fabian Habil Ramdhan");
+                break;
+            }
         }
         else {
             printf("Input Salah! Silahkan coba lagi!\n");

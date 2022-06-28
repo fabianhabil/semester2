@@ -61,7 +61,6 @@ void view(data Data[], int size) {
     // Jika hanya ada satu node di heap tersebut
     if (size == 1) {
         printf("Only one product in data!\n");
-        // printf("Value: %d (root)\n", Data[size]);
         printf("Product Name: %s\n", Data[1].nama);
         printf("Resource Product: %s\n", Data[1].resourceLocation);
         printf("Product Price: Rp%.2lf\n\n", Data[1].price);
