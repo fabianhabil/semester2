@@ -401,7 +401,7 @@ void report(int tipePesawat) {
     }
     else if (tipePesawat == 2) {
         printf("Tipe Pesawat International\n");
-        printf("Kode pesawat yang belum berangkat adalah A%.3d\n", international);
+        printf("Kode pesawat yang belum berangkat adalah B%.3d\n", international);
         printf("Jumlah penumpang yang sudah berangkat adalah %d orang\n", jumlahPenumpangInternationalBerangkat);
         printf("Jumlah penumpang yang belum berangkat adalah %d orang\n", jumlahPenumpangInternational);
         printf("Jumlah penumpang international hari ini adalah %d\n", jumlahPenumpangInternational + jumlahPenumpangInternationalBerangkat);
@@ -450,7 +450,6 @@ int main() {
                 printf("Silahkan masukkan tipe pesawat: ");
                 scanf("%d", &tipePesawat);
                 getchar();
-                system("cls");
                 if (tipePesawat == 2) {
                     sprintf(kodeKeberangkatan, "B%.3d\0", international);
                 }

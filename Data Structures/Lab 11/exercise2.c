@@ -210,7 +210,7 @@ int main() {
         getchar();
         /* Option valid jika angka dan angka ada di interval 1 dan 6, karena menu sampai 5 dan jika ingin keluar
            user input 6 */
-        if (valid == 1 && (choice >= 1 && choice <= 5)) {
+        if (valid == 1 && (choice >= 1 && choice <= 6)) {
             system("cls");
             if (choice == 1) {
                 char name[100];
