@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studi Kasus - HCI - Fabian Habil - 2501976503</title>
+    <!-- Font Roboto sesuai dengan alibaba, import menggunakan google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Menghilangkan behavior html terhadap CSS untuk menghindari styling yang tidak diinginkan. */
+        body,
+        html {
+            font-family: "Roboto", sans-serif;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+            font-family: "Roboto", sans-serif;
+        }
+
+        div,
+        h1,
+        h2,
+        h3,
+        h4,
+        p {
+            padding: 0;
+            margin: 0;
+        }
+
+        p {
+            text-align: justify;
+        }
+
+        a:hover {
+            cursor: pointer;
+            color: #00c1de;
+        }
+
+        /* ------------------------------------------------------------------ */
+        .container-main {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .navbar {
+            display: flex;
+            flex-direction: row;
+            height: 65px;
+            background-color: #2c3134;
+            width: 100vw;
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 96px;
+            padding-right: 96px;
+        }
+
+        .navbar-img {
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+        }
+
+        .navbar-kanan {
+            display: flex;
+            flex-direction: row;
+            gap: 32px;
+            color: white;
+            font-size: 16px;
+        }
+
+        .header {
+            min-height: 150px;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-image: url("header.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: right;
+            gap: 16px;
+            padding: 32px;
+        }
+
+        .header-title {
+            font-size: 36px;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        .header-content {
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .body {
+            display: flex;
+            justify-content: flex-end;
+            flex-direction: row;
+            padding-top: 24px;
+            padding-bottom: 24px;
+            padding-right: 24px;
+            padding-left: 24px;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+            border-top: solid 2px #ff6a00;
+            box-shadow: 0px 11px 20px -8px rgba(0, 0, 0, 0.3);
+            gap: 16px;
+        }
+
+        .form-info {
+            display: flex;
+            flex-direction: column;
+            margin-left: 24px;
+            flex-basis: 32%;
+            flex-wrap: wrap;
+        }
+
+        .form-content {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 75%;
+        }
+
+        .form-content h3 {
+            margin-bottom: 8px;
+        }
+
+        .form-content-feature {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .form-content-feature-info {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #979797;
+        }
+
+        .input {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .input-info {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            font-size: 12px;
+            color: #FF8A00;
+            gap: 8px;
+        }
+
+        .footer {
+            min-height: 120px;
+            width: 100vw;
+            display: flex;
+            background-color: #4b5054;
+            justify-content: center;
+            flex-direction: column;
+            gap: 16px;
+            padding-left: 96px;
+            padding-right: 96px;
+        }
+
+        .footer-section1 {
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            font-size: 14px;
+            color: white;
+        }
+
+        .footer-section2 {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 14px;
+            color: #979797;
+        }
+
+        .footer-section3 {
+            font-size: 14px;
+            color: #979797;
+        }
+
+        input[type=text],
+        input[type="password"] {
+            padding: 12px;
+            width: 100%;
+            margin-bottom: 12px;
+            background-color: rgb(123, 130, 138, 0.1);
+            border: solid 0.1px rgb(123, 130, 138, 0.5);
+            border-radius: 4px;
+            font-size: 15px;
+        }
+
+        input[type="radio"] {
+            margin: 0;
+            padding: 0;
+        }
+
+        select {
+            padding: 8px;
+            width: 100%;
+            border-radius: 2px;
+            border: solid 0.1px rgb(123, 130, 138, 0.5);
+            font-size: 15px;
+        }
+
+        input[type=text]:focus,
+        input[type="password"]:focus,
+        select:focus {
+            outline: solid 0.1px rgb(123, 130, 138, 0.4);
+        }
+
+        /* Set padding dan gap dari setiap div yang menggunakan konsep flexbox agar responsive */
+        @media screen and (max-width: 1050px) {
+            .form-content {
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width: 800px) {
+            .navbar {
+                padding-left: 48px;
+                padding-right: 48px;
+            }
+
+            .body {
+                justify-content: center;
+                flex-direction: column;
+                padding-right: 16px;
+                padding-left: 16px;
+            }
+
+            .footer {
+                padding-left: 48px;
+                padding-right: 48px;
+            }
+
+            .form {
+                margin-right: 0px;
+            }
+
+            .footer-section1 {
+                gap: 24px;
+            }
+
+            .footer-section2 {
+                display: none;
+            }
+
+            .form-info {
+                margin-top: 24px;
+                margin-left: 0px;
+            }
+        }
+
+
+        @media screen and (max-width: 500px) {
+            .navbar {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .footer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .header {
+                display: none;
+            }
+
+            .footer-section1 {
+                gap: 16px;
+            }
+
+            .footer-section2 {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            .navbar {
+                padding-right: 16px;
+                padding-left: 16px;
+            }
+
+            .navbar-kanan {
+                display: none;
+            }
+
+            .footer {
+                padding-right: 16px;
+                padding-left: 16px;
+            }
+
+            .footer-section2 {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- div besar yang wrap semua component, component kita ada tiga, yaitu top yang berisi navbar
+         dan hero content, form dan footer. -->
+    <div class="container-main">
+        <!-- div yang bernama class top, yang berisikan navbar dengan hero content. -->
+        <div class="top">
+            <!-- div class bernama navbar yang berisi logo dan beberapa menu. -->
+            <div class="navbar">
+                <img src="logo.png" class="navbar-img" />
+                <div class="navbar-kanan">
+                    <p>Homepage</p>
+                    <p>Login</p>
+                </div>
+            </div>
+            <!-- div class bernama header yang berisi hero content dan background foto. -->
+            <div class="header">
+                <p class="header-title">Create Your Alibaba Cloud Account
+                </p>
+                <p class="header-content">Free Access to Over 50 Products and Up to 12 Months Usage for Elastic Compute
+                    Service!
+                </p>
+            </div>
+        </div>
+        <!-- div yang bernama body, yang berisikan form. -->
+        <div class="body">
+            <div class="form">
+                <div class="input">
+                    <select>
+                        <option value="Indonesia">Indonesia</option>
+                        <option value="Singapore">Singapore</option>
+                        <option value="Malaysia">Malaysia</option>
+                        <option value="Thailand">Thailand</option>
+                        <option value="Australia">Australia</option>
+                    </select>
+                    <div class="input-info">
+                        <svg t="1496395775831" class="icon" style="fill:#FF8A00" viewBox="0 0 1024 1024" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" p-id="1310" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            width="15" height="15" data-spm-anchor-id="a2145.520000001.0.i4.156a52cbApOIaH">
+                            <path
+                                d="M1024 512A512 512 0 1 1 0 512a512 512 0 0 1 1024 0zM512 96a416 416 0 1 0 0 832 416 416 0 0 0 0-832z"
+                                p-id="1311" data-spm-anchor-id="a2145.520000001.0.i3.156a52cbApOIaH"></path>
+                            <path d="M464 256h96v96h-96zM464 448h96v320h-96z" p-id="1312"></path>
+                        </svg>
+                        </svg>
+                        <p>Country/region will be used for currency and tax purposes and cannot be changed after
+                            registration.</p>
+                    </div>
+                </div>
+                <div class="input">
+                    <select>
+                        <option value="Indonesia">Indonesia</option>
+                        <option value="Singapore">Singapore</option>
+                        <option value="Malaysia">Malaysia</option>
+                        <option value="Thailand">Thailand</option>
+                        <option value="Australia">Australia</option>
+                    </select>
+                    <div class="input-info">
+                        <svg t="1496395775831" class="icon" style="fill:#FF8A00" viewBox="0 0 1024 1024" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" p-id="1310" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            width="15" height="15" data-spm-anchor-id="a2145.520000001.0.i4.156a52cbApOIaH">
+                            <path
+                                d="M1024 512A512 512 0 1 1 0 512a512 512 0 0 1 1024 0zM512 96a416 416 0 1 0 0 832 416 416 0 0 0 0-832z"
+                                p-id="1311" data-spm-anchor-id="a2145.520000001.0.i3.156a52cbApOIaH"></path>
+                            <path d="M464 256h96v96h-96zM464 448h96v320h-96z" p-id="1312"></path>
+                        </svg>
+                        </svg>
+                        <p>Country/region will be used for currency and tax purposes and cannot be changed after
+                            registration.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-info">
+                <div class="form-content">
+                    <h3>Account Benefits & Registration Tips</h3>
+                    <div class="form-content-feature">
+                        <h4>Free Trial</h4>
+                        <p class="form-content-feature-info">Get free hands-on experience with 50+ products. Now up to
+                            12 Months for Elastic Compute Service!</p>
+                    </div>
+                    <div class="form-content-feature">
+                        <h4>Premium Support Services</h4>
+                        <p class="form-content-feature-info">
+                            <span style="color:#ff6a00; font-weight: bold;">
+                                1-on 1 pre-sale consultation
+                            </span>
+                            , 24/7 after-sales technical
+                            support with 6 free tickers per quarter
+                        </p>
+                    </div>
+                    <div class="form-content-feature">
+                        <h4>How do i select the country or region of my account?</h4>
+                        <p class="form-content-feature-info">For enterprise customers, please select the account
+                            registration country/region based on your business license. If not, you may be unable to
+                            obtain the correct invoice for tax deduction, and may not be eligible for your local tax
+                            free policy, or may even be unable to pay for the invoice.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer yang bernama class footer yang wrap semua isi footer. -->
+        <footer class="footer">
+            <div class="footer-section1">
+                <a>About Us</a>
+                <a>Privacy Policy</a>
+                <a>Legal</a>
+                <a>Notice List</a>
+            </div>
+            <div class="footer-section2">
+                <a>Alibaba Group</a>
+                <a>Taobao Marketplace</a>
+                <a>Tmall</a>
+                <a>Juhuausan</a>
+                <a>AliExpress</a>
+                <a>Alibaba.com</a>
+                <a>1688</a>
+                <a>Alimama</a>
+                <a>Alitrip</a>
+                <a>YunOS</a>
+                <a>AliTelecom</a>
+                <a>AutoNavi</a>
+                <a>UCWeb</a>
+                <a>Umeng</a>
+                <a>Xiami</a>
+                <a>DingTalk</a>
+                <a>Alipay</a>
+            </div>
+            <div class="footer-section3">
+                © 2009-2022 Copyright by Alibaba Cloud All rights reserved
+            </div>
+        </footer>
+    </div>
+
+    <script>
+
+    </script>
+</body>
+
+</html>
