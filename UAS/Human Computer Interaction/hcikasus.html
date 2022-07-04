@@ -81,6 +81,10 @@
             font-size: 16px;
         }
 
+        .navbar-kanan p:hover{
+            cursor: pointer;
+        }
+
         .header {
             min-height: 150px;
             width: 100vw;
@@ -117,6 +121,15 @@
             padding-left: 24px;
         }
 
+        .success{
+            display:none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap:16px;
+            font-weight: bold;
+        }
+
         .form {
             display: flex;
             flex-direction: column;
@@ -124,6 +137,7 @@
             border-top: solid 2px #ff6a00;
             box-shadow: 0px 11px 20px -8px rgba(0, 0, 0, 0.3);
             gap: 16px;
+            max-width: 550px;
         }
 
         .form-info {
@@ -164,13 +178,46 @@
             gap: 8px;
         }
 
+        .input button{
+            padding:8px;
+            background-color: #e96729;
+            border:none;
+            color:white;
+        }
+
+        .input button:hover{
+            cursor:pointer;
+            background-color: #de845a;
+
+        }
+
         .input-info {
             display: flex;
             flex-direction: row;
             align-items: flex-start;
             font-size: 12px;
-            color: #FF8A00;
             gap: 8px;
+        }
+
+        .input-error-email{
+            display:none;
+            color:red;
+        }
+
+        .input-error-password{
+            display:none;
+            color:red;
+        }
+
+        .input-error-password2{
+            display:none;
+            color:red;
+        }
+
+        .input-error-terms{
+            display:none;
+            font-size: 12px;
+            color:red;
         }
 
         .footer {
@@ -181,6 +228,8 @@
             justify-content: center;
             flex-direction: column;
             gap: 16px;
+            padding-top:24px;
+            padding-bottom:24px;
             padding-left: 96px;
             padding-right: 96px;
         }
@@ -209,22 +258,21 @@
 
         input[type=text],
         input[type="password"] {
-            padding: 12px;
+            padding:12px;
             width: 100%;
-            margin-bottom: 12px;
-            background-color: rgb(123, 130, 138, 0.1);
             border: solid 0.1px rgb(123, 130, 138, 0.5);
+            /* border: solid 2px red; */
             border-radius: 4px;
             font-size: 15px;
         }
 
-        input[type="radio"] {
-            margin: 0;
-            padding: 0;
+        input[type=checkbox]:checked {
+            accent-color:rgb(233,103,41);
+            color:white;
         }
 
         select {
-            padding: 8px;
+            padding:12px;
             width: 100%;
             border-radius: 2px;
             border: solid 0.1px rgb(123, 130, 138, 0.5);
@@ -251,6 +299,7 @@
             }
 
             .body {
+                align-items: center;
                 justify-content: center;
                 flex-direction: column;
                 padding-right: 16px;
@@ -264,6 +313,7 @@
 
             .form {
                 margin-right: 0px;
+                max-width: 1000px;
             }
 
             .footer-section1 {
@@ -352,7 +402,9 @@
         </div>
         <!-- div yang bernama body, yang berisikan form. -->
         <div class="body">
+            <!-- div besar untuk form yang berisikan beberapa input -->
             <div class="form">
+                <!-- Di setiap input, ada input-info yang berisikan info atau notice error -->
                 <div class="input">
                     <select>
                         <option value="Indonesia">Indonesia</option>
@@ -371,33 +423,62 @@
                             <path d="M464 256h96v96h-96zM464 448h96v320h-96z" p-id="1312"></path>
                         </svg>
                         </svg>
-                        <p>Country/region will be used for currency and tax purposes and cannot be changed after
+                        <p style="color: #FF8A00;">Country/region will be used for currency and tax purposes and cannot be changed after
                             registration.</p>
                     </div>
                 </div>
+                <!-- Di setiap input, ada input-info yang berisikan info atau notice error -->
                 <div class="input">
-                    <select>
-                        <option value="Indonesia">Indonesia</option>
-                        <option value="Singapore">Singapore</option>
-                        <option value="Malaysia">Malaysia</option>
-                        <option value="Thailand">Thailand</option>
-                        <option value="Australia">Australia</option>
-                    </select>
+                    <input type="text" class="email" placeholder="Enter your email" />
                     <div class="input-info">
-                        <svg t="1496395775831" class="icon" style="fill:#FF8A00" viewBox="0 0 1024 1024" version="1.1"
-                            xmlns="http://www.w3.org/2000/svg" p-id="1310" xmlns:xlink="http://www.w3.org/1999/xlink"
-                            width="15" height="15" data-spm-anchor-id="a2145.520000001.0.i4.156a52cbApOIaH">
-                            <path
-                                d="M1024 512A512 512 0 1 1 0 512a512 512 0 0 1 1024 0zM512 96a416 416 0 1 0 0 832 416 416 0 0 0 0-832z"
-                                p-id="1311" data-spm-anchor-id="a2145.520000001.0.i3.156a52cbApOIaH"></path>
-                            <path d="M464 256h96v96h-96zM464 448h96v320h-96z" p-id="1312"></path>
-                        </svg>
-                        </svg>
-                        <p>Country/region will be used for currency and tax purposes and cannot be changed after
-                            registration.</p>
+                        <p class="input-error-email">
+                            Please enter your email.
+                        </p>
                     </div>
+                </div>
+                <!-- Di setiap input, ada input-info yang berisikan info atau notice error -->
+                <div class="input">
+                    <input type="password" class="password" placeholder="Enter your password" />
+                    <div class="input-info">
+                        <p class="input-error-password">
+                            Please enter your password.
+                        </p>
+                    </div>
+                </div>
+                <!-- Di setiap input, ada input-info yang berisikan info atau notice error -->
+                <div class="input">
+                    <input type="password" class="password2" placeholder="Confirm your password" />
+                    <div class="input-info">
+                        <p class="input-error-password2">
+                            Please enter your password.
+                        </p>
+                    </div>
+                </div>
+                <!-- Di setiap input, ada input-info yang berisikan info atau notice error -->
+                <div class="input">
+                    <div class="input-info">
+                        <input type="checkbox" class="checkbox"/>
+                        <label>
+                            <p style="font-size:14px">I hereby agree to the Alibaba Cloud International Website <a style="color:#ff6a00;" target="_blank">Membership Agreement, Privacy Policy, Product Terms and Terms of Use</a>, under which I am contracting with Alibaba Cloud (Singapore) Private Limited.</p>
+                        </label>
+                    </div>
+                    <p class="input-error-terms">
+                        You need to agree our agreement to continue.
+                    </p>
+                </div>
+                <div class="input">
+                    <button class="confirm-button">Confirm</button>
+                </div>
+                <div class="input">
+                    <p style="text-align: center; font-size: 14px;">
+                        Already a member? 
+                        <a style="color:#FF8A00;">
+                            Sign In
+                        </a>
+                    </p>
                 </div>
             </div>
+            <!-- div form info adalah info sebelah dari form untuk sign up -->
             <div class="form-info">
                 <div class="form-content">
                     <h3>Account Benefits & Registration Tips</h3>
@@ -425,15 +506,25 @@
                     </div>
                 </div>
             </div>
+            <!-- div success untuk nantinya jika input user memenuhi syarat -->
+            <div class="success">
+                <div class="username-user">
+                    Halo User!
+                </div>
+                <div class="password-user">Password anda adalah</div>
+                <div>Dibuat oleh 2501976503 - Fabian Habil Ramdhan untuk memenuhi Studi Kasus UAS Human Computer Interaction Semester 2</div>
+            </div>
         </div>
         <!-- footer yang bernama class footer yang wrap semua isi footer. -->
         <footer class="footer">
+            <!-- Section 1 adalah baris satu -->
             <div class="footer-section1">
                 <a>About Us</a>
                 <a>Privacy Policy</a>
                 <a>Legal</a>
                 <a>Notice List</a>
             </div>
+            <!-- Section 2 adalah baris dua -->
             <div class="footer-section2">
                 <a>Alibaba Group</a>
                 <a>Taobao Marketplace</a>
@@ -453,6 +544,7 @@
                 <a>DingTalk</a>
                 <a>Alipay</a>
             </div>
+            <!-- Section 3 adalah baris tiga -->
             <div class="footer-section3">
                 © 2009-2022 Copyright by Alibaba Cloud All rights reserved
             </div>
@@ -460,7 +552,155 @@
     </div>
 
     <script>
+        // Select element dari setiap input yang kita punya
+        const emailform = document.querySelector(".email")
+        const passwordForm = document.querySelector(".password")
+        const passwordConfirmForm = document.querySelector(".password2")
 
+        // Select button
+        const button = document.querySelector(".confirm-button")
+
+        // Select element dari setiap div yang memunculkan notice error
+        // Boolean di sini jika 0 atau false, maka masih error dan tidak bisa lanjut
+        // Jika 1 maka sudah benar
+        const emailNotice = document.querySelector(".input-error-email")
+        let emailNoticeBoolean = 0;
+        const passwordNotice = document.querySelector(".input-error-password")
+        let passwordNoticeBoolean = 0;
+        const passwordConfirmNotice = document.querySelector(".input-error-password2")
+        let passwordConfirmNoticeBoolean = 0;
+        const termAgreement = document.querySelector(".checkbox")
+        const termAgreementNotice = document.querySelector(".input-error-terms")
+
+        // Variabel kosong untuk menyimpan input user dan nantinya dicek.
+        let email = ""
+        let password= ""
+        let confirmpassword = ""
+
+        // Regex dari email validasi, sumber dari regex ini didapatkan dari stackoverflow.
+        const emailValidation = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    
+        // Ketika input form email berubah.
+        emailform.addEventListener("keyup", (e)=>{
+            // Jadikan variabel email menjadi input user sekarang.
+            email = emailform.value;
+            // Ketika value dari input email masih kosong.
+            if(emailform.value == ""){
+                // Ganti text notice error email agar user tau harus memasukan email, munculkan lagi componentnya dengan display flec
+                // Dan jadikan boolean notice nya false atau belum memenuhi syarat.
+                emailNotice.innerHTML="Please enter your email.";
+                emailNotice.style.display = "flex";
+                emailNoticeBoolean = 0;
+            }
+            // Ketika value dari input email sudah ada isinya.
+            else{
+                // Ketika value yang diinput user sudah memenuhi syarat email.
+                if(emailform.value.toLowerCase().match(emailValidation)){
+                    // Sembunyikan component notice error dengan display none.
+                    emailNotice.style.display = "none";
+                    // Dan jadikan boolean noticenya true karena sudah memenuhi syarat.
+                    emailNoticeBoolean = 1;
+                }
+                else{
+                    // Namun jika belum memenuhi syarat, munculkan lagi componentnya dengan display flex
+                    // Rubah juga notice nya menjadi email belum sesuai dengan syarat
+                    // Dan jadikan boolean noticenya false karena belum memenuhi syarat.
+                    emailNotice.innerHTML="Please enter a valid email address.";
+                    emailNotice.style.display = "flex";
+                    emailNoticeBoolean = 0;
+                }
+            }
+        })
+
+        // Ketika input form password berubah.
+        passwordForm.addEventListener("keyup", (e)=>{
+            // Jadikan variabel password menjadi input user sekarang.
+            password = passwordForm.value;
+            // Ketika value dari input password masih kosong.
+            if(passwordForm.value == ""){
+                // Munculkan component tersebut dengan display flex
+                passwordNotice.style.display = "flex";
+                passwordNoticeBoolean = 0;
+            }
+            // Ketika value dari input password sudah ada isinya.
+            else{
+                // Sembunyikan component notice error dengan display none.
+                passwordNotice.style.display = "none";
+                passwordNoticeBoolean = 1;
+            }
+
+            // Jika user kembali input form ini, pastikan input dari konfirmasi password
+            // direset kembali.
+            confirmpassword = passwordConfirmForm.value = ""
+        })
+
+        // Ketika input form password confirm berubah.
+        passwordConfirmForm.addEventListener("keyup", (e)=>{
+            // Jadikan variabel confirm password menjadi input user sekarang.
+            confirmpassword = passwordConfirmForm.value;
+            // Ketika value dari input confirm password masih kosong.
+            if(passwordConfirmForm.value == ""){
+                // Ganti text notice error confirm password menjadi enter a password
+                // Agar user tau bahwa harus memasukkan password
+                // Dan tampilkan component tersebut dengan display flex.
+                passwordConfirmNotice.innerHTML = "Please enter a password."
+                passwordConfirmNotice.style.display = "flex";
+                passwordConfirmNoticeBoolean = 0;
+            }
+            // Ketika value dari input confirm password sekarang sudah ada isinya.
+            else{
+                // Jika isi dari password dan konfirmasi password sama
+                // Maka kita tidak tampilkan error apa - apa di layar
+                // Dengan cara set component tersebut menjadi display none.
+                if(confirmpassword == password){
+                    passwordConfirmNotice.style.display = "none";
+                    passwordConfirmNoticeBoolean = 1;
+                }
+                // Namun jika tidak sama, kita ganti notice error confirm password kita
+                // Menjadi password tidak sama, lalu kita tampilkan component ini menggunakan
+                // Display flex.
+                else{
+                    passwordConfirmNotice.innerHTML = "Password not match."
+                    passwordConfirmNotice.style.display = "flex";
+                    passwordConfirmNoticeBoolean = 0;
+                }
+            }
+        })
+
+        // Ketika button diklik
+        button.addEventListener("click", (e)=>{
+            // Jika semua boolean dan term agreemeent sudah diceklis, maka bisa melanjutkan ke sign up
+            if(emailNoticeBoolean && passwordNoticeBoolean && passwordConfirmNoticeBoolean && termAgreement.checked == true){
+                termAgreementNotice.style.display="none";
+
+                // Buat form dan form info menjadi none atau kita sembunyikan.
+                document.querySelector(".form").style.display = "none"
+                document.querySelector(".form-info").style.display = "none"
+
+                // Munculkan component success dengan display flex
+                document.querySelector(".success").style.display = "flex"
+                // Jadikan parent dari component success menjadi justifycontent center'
+                // Agar memunculkannya di tengah.
+                document.querySelector(".body").style.justifyContent = "center"
+
+                // Buat isi dari component yang berisikan username dan password user
+                document.querySelector(".username-user").innerHTML = `Halo ${email}`
+                document.querySelector(".password-user").innerHTML = `Password anda adalah ${password}`
+
+            }
+            // Namun jika salah satu ada yang tidak terpenuhi
+            else{
+                // Kita cek di sini apakah agreement sudah dicheck atau belum, jika belum kita munculkan notice error ke user.
+                if(termAgreement.checked){
+                    termAgreementNotice.style.display="none";
+                }
+                else{
+                    termAgreementNotice.style.display="flex";
+                }
+                console.log("no")
+            }
+        })
+        
     </script>
 </body>
 
