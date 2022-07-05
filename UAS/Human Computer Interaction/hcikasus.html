@@ -260,10 +260,20 @@
         input[type="password"] {
             padding: 12px;
             width: 100%;
-            border: solid 0.1px rgb(123, 130, 138, 0.5);
-            /* border: solid 2px red; */
             border-radius: 4px;
             font-size: 15px;
+        }
+
+        .email{
+            border: solid 0.1px rgb(123, 130, 138, 0.5);
+        }
+
+        .password{
+            border: solid 0.1px rgb(123, 130, 138, 0.5);
+        }
+
+        .password2{
+            border: solid 0.1px rgb(123, 130, 138, 0.5);
         }
 
         input[type=checkbox]:checked {
@@ -591,8 +601,10 @@
             email = emailform.value;
             // Ketika value dari input email masih kosong.
             if (emailform.value == "") {
-                // Ganti text notice error email agar user tau harus memasukan email, munculkan lagi componentnya dengan display flec
+                // Ganti text notice error email agar user tau harus memasukan email, munculkan lagi componentnya dengan display flex
+                // Lalu jadikan border dari inputnya menjadi merah.
                 // Dan jadikan boolean notice nya false atau belum memenuhi syarat.
+                emailform.style.border = "solid 1px red";
                 emailNotice.innerHTML = "Please enter your email.";
                 emailNotice.style.display = "flex";
                 emailNoticeBoolean = 0;
@@ -603,13 +615,17 @@
                 if (emailform.value.toLowerCase().match(emailValidation)) {
                     // Sembunyikan component notice error dengan display none.
                     emailNotice.style.display = "none";
+                    // Lalu jadikan border warna dari inputnya menjadi biasa.
+                    emailform.style.border = "solid 0.1px rgb(123, 130, 138, 0.5)"
                     // Dan jadikan boolean noticenya true karena sudah memenuhi syarat.
                     emailNoticeBoolean = 1;
                 }
                 else {
                     // Namun jika belum memenuhi syarat, munculkan lagi componentnya dengan display flex
                     // Rubah juga notice nya menjadi email belum sesuai dengan syarat
+                    // Lalu jadikan border dari inputnya menjadi merah.
                     // Dan jadikan boolean noticenya false karena belum memenuhi syarat.
+                    emailform.style.border = "solid 1px red";
                     emailNotice.innerHTML = "Please enter a valid email address.";
                     emailNotice.style.display = "flex";
                     emailNoticeBoolean = 0;
@@ -624,16 +640,19 @@
             // Ketika value dari input password masih kosong.
             if (passwordForm.value == "") {
                 // Munculkan component tersebut dengan display flex
+                // Lalu jadikan border dari inputnya menjadi merah.
+                passwordForm.style.border = "solid 1px red";
                 passwordNotice.style.display = "flex";
                 passwordNoticeBoolean = 0;
             }
             // Ketika value dari input password sudah ada isinya.
             else {
                 // Sembunyikan component notice error dengan display none.
+                // Lalu jadikan border dari inputnya menjadi biasa.
+                passwordForm.style.border = "solid 0.1px rgb(123, 130, 138, 0.5)";
                 passwordNotice.style.display = "none";
                 passwordNoticeBoolean = 1;
             }
-
             // Jika user kembali input form ini, pastikan input dari konfirmasi password
             // direset kembali.
             confirmpassword = passwordConfirmForm.value = ""
@@ -647,7 +666,9 @@
             if (passwordConfirmForm.value == "") {
                 // Ganti text notice error confirm password menjadi enter a password
                 // Agar user tau bahwa harus memasukkan password
+                // Lalu jadikan border dari inputnya menjadi merah
                 // Dan tampilkan component tersebut dengan display flex.
+                passwordConfirmForm.style.border = "1px solid red"
                 passwordConfirmNotice.innerHTML = "Please enter a password."
                 passwordConfirmNotice.style.display = "flex";
                 passwordConfirmNoticeBoolean = 0;
@@ -657,14 +678,18 @@
                 // Jika isi dari password dan konfirmasi password sama
                 // Maka kita tidak tampilkan error apa - apa di layar
                 // Dengan cara set component tersebut menjadi display none.
+                // Lalu jadikan juga bordernya menjadi biasa.
                 if (confirmpassword == password) {
                     passwordConfirmNotice.style.display = "none";
+                    passwordConfirmForm.style.border="solid 0.1px rgb(123, 130, 138, 0.5)";
                     passwordConfirmNoticeBoolean = 1;
                 }
                 // Namun jika tidak sama, kita ganti notice error confirm password kita
                 // Menjadi password tidak sama, lalu kita tampilkan component ini menggunakan
                 // Display flex.
+                // Lalu jadikan juga bordernya menjadi merah
                 else {
+                    passwordConfirmForm.style.border="solid 1px red";
                     passwordConfirmNotice.innerHTML = "Password not match."
                     passwordConfirmNotice.style.display = "flex";
                     passwordConfirmNoticeBoolean = 0;
@@ -704,72 +729,88 @@
                 }
 
                 // Ketika value dari input email masih kosong.
-                if (emailform.value == "") {
-                    // Ganti text notice error email agar user tau harus memasukan email, munculkan lagi componentnya dengan display flec
-                    // Dan jadikan boolean notice nya false atau belum memenuhi syarat.
-                    emailNotice.innerHTML = "Please enter your email.";
+            if (emailform.value == "") {
+                // Ganti text notice error email agar user tau harus memasukan email, munculkan lagi componentnya dengan display flex
+                // Lalu jadikan border dari inputnya menjadi merah.
+                // Dan jadikan boolean notice nya false atau belum memenuhi syarat.
+                emailform.style.border = "solid 1px red";
+                emailNotice.innerHTML = "Please enter your email.";
+                emailNotice.style.display = "flex";
+                emailNoticeBoolean = 0;
+            }
+            // Ketika value dari input email sudah ada isinya.
+            else {
+                // Ketika value yang diinput user sudah memenuhi syarat email.
+                if (emailform.value.toLowerCase().match(emailValidation)) {
+                    // Sembunyikan component notice error dengan display none.
+                    emailNotice.style.display = "none";
+                    // Lalu jadikan border warna dari inputnya menjadi biasa.
+                    emailform.style.border = "solid 0.1px rgb(123, 130, 138, 0.5)"
+                    // Dan jadikan boolean noticenya true karena sudah memenuhi syarat.
+                    emailNoticeBoolean = 1;
+                }
+                else {
+                    // Namun jika belum memenuhi syarat, munculkan lagi componentnya dengan display flex
+                    // Rubah juga notice nya menjadi email belum sesuai dengan syarat
+                    // Lalu jadikan border dari inputnya menjadi merah.
+                    // Dan jadikan boolean noticenya false karena belum memenuhi syarat.
+                    emailform.style.border = "solid 1px red";
+                    emailNotice.innerHTML = "Please enter a valid email address.";
                     emailNotice.style.display = "flex";
                     emailNoticeBoolean = 0;
                 }
-                // Ketika value dari input email sudah ada isinya.
-                else {
-                    // Ketika value yang diinput user sudah memenuhi syarat email.
-                    if (emailform.value.toLowerCase().match(emailValidation)) {
-                        // Sembunyikan component notice error dengan display none.
-                        emailNotice.style.display = "none";
-                        // Dan jadikan boolean noticenya true karena sudah memenuhi syarat.
-                        emailNoticeBoolean = 1;
-                    }
-                    else {
-                        // Namun jika belum memenuhi syarat, munculkan lagi componentnya dengan display flex
-                        // Rubah juga notice nya menjadi email belum sesuai dengan syarat
-                        // Dan jadikan boolean noticenya false karena belum memenuhi syarat.
-                        emailNotice.innerHTML = "Please enter a valid email address.";
-                        emailNotice.style.display = "flex";
-                        emailNoticeBoolean = 0;
-                    }
-                }
+            }
 
-                // Ketika value dari input password masih kosong.
-                if (passwordForm.value == "") {
-                    // Munculkan component tersebut dengan display flex
-                    passwordNotice.style.display = "flex";
-                    passwordNoticeBoolean = 0;
-                }
-                // Ketika value dari input password sudah ada isinya.
-                else {
-                    // Sembunyikan component notice error dengan display none.
-                    passwordNotice.style.display = "none";
-                    passwordNoticeBoolean = 1;
-                }
+            // Ketika value dari input password masih kosong.
+            if (passwordForm.value == "") {
+                // Munculkan component tersebut dengan display flex
+                // Lalu jadikan border dari inputnya menjadi merah.
+                passwordForm.style.border = "solid 1px red";
+                passwordNotice.style.display = "flex";
+                passwordNoticeBoolean = 0;
+            }
+            // Ketika value dari input password sudah ada isinya.
+            else {
+                // Sembunyikan component notice error dengan display none.
+                // Lalu jadikan border dari inputnya menjadi biasa.
+                passwordForm.style.border = "solid 0.1px rgb(123, 130, 138, 0.5)";
+                passwordNotice.style.display = "none";
+                passwordNoticeBoolean = 1;
+            }
 
                 // Ketika value dari input confirm password masih kosong.
-                if (passwordConfirmForm.value == "") {
-                    // Ganti text notice error confirm password menjadi enter a password
-                    // Agar user tau bahwa harus memasukkan password
-                    // Dan tampilkan component tersebut dengan display flex.
-                    passwordConfirmNotice.innerHTML = "Please enter a password."
+            if (passwordConfirmForm.value == "") {
+                // Ganti text notice error confirm password menjadi enter a password
+                // Agar user tau bahwa harus memasukkan password
+                // Lalu jadikan border dari inputnya menjadi merah
+                // Dan tampilkan component tersebut dengan display flex.
+                passwordConfirmForm.style.border = "1px solid red"
+                passwordConfirmNotice.innerHTML = "Please enter a password."
+                passwordConfirmNotice.style.display = "flex";
+                passwordConfirmNoticeBoolean = 0;
+            }
+            // Ketika value dari input confirm password sekarang sudah ada isinya.
+            else {
+                // Jika isi dari password dan konfirmasi password sama
+                // Maka kita tidak tampilkan error apa - apa di layar
+                // Dengan cara set component tersebut menjadi display none.
+                // Lalu jadikan juga bordernya menjadi biasa.
+                if (confirmpassword == password) {
+                    passwordConfirmNotice.style.display = "none";
+                    passwordConfirmForm.style.border="solid 0.1px rgb(123, 130, 138, 0.5)";
+                    passwordConfirmNoticeBoolean = 1;
+                }
+                // Namun jika tidak sama, kita ganti notice error confirm password kita
+                // Menjadi password tidak sama, lalu kita tampilkan component ini menggunakan
+                // Display flex.
+                // Lalu jadikan juga bordernya menjadi merah
+                else {
+                    passwordConfirmForm.style.border="solid 1px red";
+                    passwordConfirmNotice.innerHTML = "Password not match."
                     passwordConfirmNotice.style.display = "flex";
                     passwordConfirmNoticeBoolean = 0;
                 }
-                // Ketika value dari input confirm password sekarang sudah ada isinya.
-                else {
-                    // Jika isi dari password dan konfirmasi password sama
-                    // Maka kita tidak tampilkan error apa - apa di layar
-                    // Dengan cara set component tersebut menjadi display none.
-                    if (confirmpassword == password) {
-                        passwordConfirmNotice.style.display = "none";
-                        passwordConfirmNoticeBoolean = 1;
-                    }
-                    // Namun jika tidak sama, kita ganti notice error confirm password kita
-                    // Menjadi password tidak sama, lalu kita tampilkan component ini menggunakan
-                    // Display flex.
-                    else {
-                        passwordConfirmNotice.innerHTML = "Password not match."
-                        passwordConfirmNotice.style.display = "flex";
-                        passwordConfirmNoticeBoolean = 0;
-                    }
-                }
+            }
             }
         })
     </script>
