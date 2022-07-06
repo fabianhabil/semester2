@@ -2,10 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(){
+int main() {
     time_t timenow;
+    struct tm* timeinfo;
     time(&timenow);
+    timeinfo = localtime(&timenow);
     char date[100];
-    sprintf(date, ctime(&timenow));
-    printf("%s", date);
+    printf("%d:%d", timeinfo->tm_hour, timeinfo->tm_min);
 }

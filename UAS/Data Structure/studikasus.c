@@ -9,7 +9,7 @@
 struct node {
     char name[100];
     char nim[15];
-    char date[100];
+    char time[15];
     struct node* leftChildren;
     struct node* rightChildren;
 };
@@ -27,9 +27,16 @@ struct node* createNewNode(char* name, char* nim) {
         = (struct node*)malloc(sizeof(struct node));
     // Variabel timenow dengan data time_t, lalu kita assign menggunakan time()
     time_t timenow;
+    // Dari struct sini kita bisa mendapatkan jam dan menit waktu sekarang.
+    struct tm* timeinfo;
     time(&timenow);
+    timeinfo = localtime(&timenow);
+
+    char time[15];
+    // Kita set value dari time menjadi waktu sekarang (hh:mm)
+    sprintf(time, "%d:%d\0", timeinfo->tm_hour, timeinfo->tm_min);
     // Masukkan value nama, nim dan tanggal sekarang di node yang baru.
-    strcpy(newNode->date, ctime(&timenow));
+    strcpy(newNode->time, time);
     strcpy(newNode->name, name);
     strcpy(newNode->nim, nim);
     // Jadikan left children dan right children dari node yang baru menjadi NULL.
@@ -74,7 +81,7 @@ void printInOrder(struct node* curr) {
         // Print data mahasiswa.
         printf("Name: %s\n", curr->name);
         printf("ID: %s\n", curr->nim);
-        printf("Date of Attendance: %s\n", curr->date);
+        printf("Time of Attendance: %s\n\n", curr->time);
         printInOrder(curr->rightChildren);
     }
 }
@@ -89,7 +96,7 @@ int searchByNIM(struct node* curr, char* search) {
     // Maka kita print data dari mahasiswa.
     else if (strcmp(curr->nim, search) == 0) {
         printf("%s found with ID %s\n", curr->name, curr->nim);
-        printf("Date of Attendance %s", curr->date);
+        printf("Time of Attendance %s\n", curr->time);
         return 1;
     }
     else {
